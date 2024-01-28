@@ -1,0 +1,12 @@
+ext {
+    droolsVersion = "7.74.1.Final"
+}
+
+dependencies {
+    implementation "org.kie:kie-spring:$droolsVersion"
+    implementation "org.drools:drools-mvel:$droolsVersion"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
