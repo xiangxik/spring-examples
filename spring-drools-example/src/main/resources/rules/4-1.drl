@@ -1,8 +1,19 @@
+import kenk.springdroolsexample.model.Application
 import kenk.springdroolsexample.model.Applicant
 
 rule "Is of valid age"
 when
-  $a : Applicant(age < 18)
+  Applicant(age < 18)
+  $a : Application()
 then
   $a.setValid(false);
+  System.out.println("trigger rule Is of valid age");
+end
+
+rule "Application was made this year"
+when
+  $a : Application(dateApplied > "01-jan-2009")
+then
+  $a.setValid(false);
+  System.out.println("Application was made this year");
 end

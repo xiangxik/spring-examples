@@ -1,5 +1,6 @@
 package kenk.springdroolsexample.support.drools;
 
+import org.kie.api.runtime.KieContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class DroolsConfiguration {
 
     @Bean
-    public DroolsManager droolsManager() {
-        return new DroolsManagerImpl("D:\\github\\xiangxik\\spring-examples\\spring-drools-example\\src\\main\\resources\\rules");
+    public KieContainer kieContainer() {
+        return new ReloadableKieContainer("D:\\github\\xiangxik\\spring-examples\\spring-drools-example\\src\\main\\resources\\rules");
     }
+
 }
