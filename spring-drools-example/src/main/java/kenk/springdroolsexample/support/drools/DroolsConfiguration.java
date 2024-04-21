@@ -9,7 +9,7 @@ public class DroolsConfiguration {
 
     @Bean
     public KieContainer kieContainer() {
-        return new ReloadableKieContainer("D:\\github\\xiangxik\\spring-examples\\spring-drools-example\\src\\main\\resources\\rules");
+        return new ReloadableKieContainer("rules");
     }
 
 }

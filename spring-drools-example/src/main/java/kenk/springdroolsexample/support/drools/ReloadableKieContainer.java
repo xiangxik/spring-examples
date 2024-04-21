@@ -4,6 +4,7 @@ import org.drools.compiler.compiler.io.memory.MemoryFileSystem;
 import org.drools.compiler.kie.builder.impl.InternalKieModule;
 import org.drools.compiler.kie.builder.impl.KieContainerImpl;
 import org.drools.compiler.kie.builder.impl.KieFileSystemImpl;
+import org.drools.core.io.impl.ClassPathResource;
 import org.drools.core.io.impl.FileSystemResource;
 import org.kie.api.KieBase;
 import org.kie.api.KieBaseConfiguration;
@@ -30,16 +31,17 @@ public class ReloadableKieContainer implements KieContainer {
     }
 
     public boolean reload() {
-        FileSystemResource fileSystemResource = new FileSystemResource(path);
-        if (!fileSystemResource.isDirectory()) {
+        ClassPathResource resource = new ClassPathResource(path);
+        //FileSystemResource resource = new FileSystemResource(path);
+        if (!resource.isDirectory()) {
             throw new RuntimeException("path must be a folder");
         }
 
         MemoryFileSystem mfs = ((KieFileSystemImpl) kieFileSystem).asMemoryFileSystem();
         Set<String> existFilePaths = new HashSet<>();
-        for (Resource resource : fileSystemResource.listResources()) {
-            kieFileSystem.write(resource);
-            existFilePaths.add(resource.getSourcePath());
+        for (Resource res : resource.listResources()) {
+            kieFileSystem.write(res);
+            existFilePaths.add(res.getSourcePath());
         }
 
         List<String> fileNames = new ArrayList<>(mfs.getFileNames());

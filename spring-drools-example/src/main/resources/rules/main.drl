@@ -1,6 +1,6 @@
-import kenk.springdroolsexample.model.Application
-import kenk.springdroolsexample.model.Applicant
-
+import kenk.springdroolsexample.model.PersonRelated
+import kenk.springdroolsexample.model.Person
+/*
 rule "Is of valid age"
 when
   Applicant(age < 18)
@@ -16,4 +16,29 @@ when
 then
   $a.setValid(false);
   System.out.println("Application was made this year");
+end
+*/
+
+rule "Person age"
+when
+  $p: Person(age > 10)
+then
+  insert(new PersonRelated($p));
+  System.out.println("insert test1");
+end
+
+rule "PersonRelated"
+when
+  PersonRelated()
+then
+  //insert(new Applicant("test1", 2));
+  System.out.println("personal related");
+end
+
+rule "not PersonRelated"
+when
+  not PersonRelated()
+then
+  //insert(new Applicant("test1", 2));
+  System.out.println("not personal related");
 end
