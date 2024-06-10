@@ -1,6 +1,7 @@
 package kenk.springdroolsexample.controller;
 
 import kenk.springdroolsexample.model.*;
+import org.drools.core.event.DebugAgendaEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.StatelessKieSession;
@@ -34,6 +35,9 @@ public class StatefulSessionController {
         Person p = new Person("a", 8);
         FactHandle personHandle = kieSession.insert( p );
 
+        Monitoring monitoring = new Monitoring();
+        kieSession.insert(monitoring);
+//        kieSession.addEventListener(new DebugAgendaEventListener());
         kieSession.fireAllRules();
 
         System.out.println("fire1");
@@ -44,7 +48,7 @@ public class StatefulSessionController {
         FactHandle kitchenFireHandle = kieSession.insert( kitchenFire );
         FactHandle officeFireHandle = kieSession.insert( officeFire );
 
-        p.setAge(9);
+        p.setAge(220);
         kieSession.update(personHandle, p);
 
         kieSession.fireAllRules();
@@ -54,6 +58,8 @@ public class StatefulSessionController {
         kieSession.delete( kitchenFireHandle );
         kieSession.delete( officeFireHandle );
         kieSession.fireAllRules();
+
+        System.out.println(monitoring);
 
 
         return "done";

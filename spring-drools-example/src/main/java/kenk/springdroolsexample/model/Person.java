@@ -1,5 +1,8 @@
 package kenk.springdroolsexample.model;
 
+import org.kie.api.definition.type.PropertyChangeSupport;
+
+@PropertyChangeSupport
 public class Person {
     private String name;
     private int age;

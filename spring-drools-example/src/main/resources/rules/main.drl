@@ -1,5 +1,6 @@
 import kenk.springdroolsexample.model.PersonRelated
 import kenk.springdroolsexample.model.Person
+import kenk.springdroolsexample.model.Monitoring
 /*
 rule "Is of valid age"
 when
@@ -21,6 +22,7 @@ end
 
 rule "Person age"
 when
+  Monitoring()
   $p: Person(age > 10)
 then
   insert(new PersonRelated($p));
@@ -41,4 +43,17 @@ when
 then
   //insert(new Applicant("test1", 2));
   System.out.println("not personal related");
+end
+
+rule "jump go"
+when
+  $p: Person(age > 10)
+  if (age > 18)do[large18]
+  if(age > 100)break[large100]
+then
+  System.out.println("then jump go");
+then[large18]
+  System.out.println("larger than 18");
+then[large100]
+  System.out.println("larger than 100");
 end
