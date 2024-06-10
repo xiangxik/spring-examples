@@ -1,0 +1,10 @@
+package kenk.springchatdialog.rule.lin
+import kenk.springdroolsexample.model.Monitoring
+
+
+rule "P1"
+when
+  Monitoring()
+then
+  System.out.println("p1");
+end

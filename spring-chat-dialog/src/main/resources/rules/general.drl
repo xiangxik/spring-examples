@@ -1,0 +1,9 @@
+package kenk.springchatdialog.rule.gen
+import kenk.springchatdialog.model.Dialog
+
+rule "Aways true"
+when
+  Dialog()
+then
+  System.out.println("gen");
+end

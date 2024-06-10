@@ -1,3 +1,4 @@
+package kenk.springchatdialog.rule.min
 import kenk.springdroolsexample.model.Room
 import kenk.springdroolsexample.model.Fire
 import kenk.springdroolsexample.model.Sprinkler

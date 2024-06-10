@@ -1,3 +1,4 @@
+package test
 import kenk.springdroolsexample.model.PersonRelated
 import kenk.springdroolsexample.model.Person
 import kenk.springdroolsexample.model.Monitoring

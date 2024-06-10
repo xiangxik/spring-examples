@@ -21,7 +21,7 @@ public class StatefulSessionController {
 
     @GetMapping("/stateful/trigger")
     public String trigger() {
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = kieContainer.newKieSession("MIN_session");
         String[] names = new String[]{"kitchen", "bedroom", "office", "livingroom"};
         Map<String, Room> name2room = new HashMap<String,Room>();
         for( String name: names ){
@@ -40,7 +40,7 @@ public class StatefulSessionController {
 //        kieSession.addEventListener(new DebugAgendaEventListener());
         kieSession.fireAllRules();
 
-        System.out.println("fire1");
+//        System.out.println("fire1");
 
         Fire kitchenFire = new Fire( name2room.get( "kitchen" ) );
         Fire officeFire = new Fire( name2room.get( "office" ) );
@@ -53,7 +53,7 @@ public class StatefulSessionController {
 
         kieSession.fireAllRules();
 
-        System.out.println("fire2");
+//        System.out.println("fire2");
 
         kieSession.delete( kitchenFireHandle );
         kieSession.delete( officeFireHandle );

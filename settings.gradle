@@ -1,2 +1,4 @@
 rootProject.name = 'spring-examples'
 include 'spring-drools-example'
+include 'spring-chat-dialog'
+

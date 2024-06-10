@@ -11,6 +11,7 @@ import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.builder.*;
 import org.kie.api.builder.model.KieBaseModel;
+import org.kie.api.builder.model.KieModuleModel;
 import org.kie.api.builder.model.KieSessionModel;
 import org.kie.api.io.Resource;
 import org.kie.api.runtime.*;
@@ -54,6 +55,14 @@ public class ReloadableKieContainer implements KieContainer {
                 }
             }
         }
+
+                KieModuleModel module = kieServices.newKieModuleModel();
+        module.newKieBaseModel("GEN").addPackage("kenk.springchatdialog.rule.gen").setDefault(true).newKieSessionModel("GEN_session").setDefault(true).setType(KieSessionModel.KieSessionType.STATEFUL);
+        module.newKieBaseModel("LIN").addInclude("GEN").addPackage("kenk.springchatdialog.rule.lin").newKieSessionModel("LIN_session").setType(KieSessionModel.KieSessionType.STATEFUL);
+        module.newKieBaseModel("MIN").addInclude("GEN").addPackage("kenk.springchatdialog.rule.min").newKieSessionModel("MIN_session").setType(KieSessionModel.KieSessionType.STATEFUL);
+        kieFileSystem.writeKModuleXML(module.toXML());
+
+        //FileKieModule
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
         kieBuilder.buildAll();
         if (kieBuilder.getResults().hasMessages(Message.Level.ERROR)) {
